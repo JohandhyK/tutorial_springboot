@@ -1,5 +1,7 @@
 package com.example.tutorials.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,11 @@ public class StudentService {
 		se.setLast_name(studentEntity.getLast_name());
 		
 		return studentRepository.save(se);
+	}
+	
+	//read all student
+	public List<StudentEntity> getAllStudent(){
+		return studentRepository.findAll();
 	}
 
 	
