@@ -27,6 +27,23 @@ public class StudentService {
 	public List<StudentEntity> getAllStudent(){
 		return studentRepository.findAll();
 	}
+	
+	//update a student data
+	public StudentEntity updateStudent(Integer id, StudentEntity entity) 
+	{
+		StudentEntity se = studentRepository.findById(id).get();
+		
+		se.setFirst_name(entity.getFirst_name());
+		se.setLast_name(entity.getLast_name());
+		
+		return studentRepository.save(se);
+	}
+	
+	//delete Student data
+	public void deleteStudent(Integer id) {
+		StudentEntity se = new StudentEntity();
+		studentRepository.deleteById(id);
 
+	}
 	
 }
