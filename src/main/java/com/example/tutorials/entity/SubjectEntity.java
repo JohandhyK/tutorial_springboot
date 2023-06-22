@@ -8,9 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
+import org.aspectj.weaver.ast.Not;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -23,33 +22,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "students")
+@Table(name = "subjects")
+public class SubjectEntity {
 
-public class StudentEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	public Integer id;
 	
-	@Column(name = "first_name")
+	@Column(name = "name")
 	@NotNull
-	public String first_name;
+	public String name;
 	
-	@Column(name = "last_name")
+	@Column(name = "description")
 	@NotNull
-	public String last_name;
-	
-	@Column(name = "email")
-	@NotNull
-	public String email;
-	
-//	@Column(name = "city_id")
-//	public Integer city_id;
+	public String description;
 	
 	@Column(name = "status_deleted")
 	public Boolean status_deleted = false;
@@ -63,5 +56,5 @@ public class StudentEntity {
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updated_at;
-	
+
 }

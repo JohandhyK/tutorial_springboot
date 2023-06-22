@@ -24,14 +24,13 @@ public class StudentController {
 		return studentService.addNewStudent(studentEntity);
 	}
 	
-	@RequestMapping(value = "/viewAllStudent", method = RequestMethod.GET)
+	@RequestMapping(value = "/viewAllStudents", method = RequestMethod.GET)
 	public List<StudentEntity> readAllStudent(){
 		return studentService.getAllStudent();
 	}
 	
 	@RequestMapping(value = "/updateStudent/{id}", method = RequestMethod.PATCH)
 	public StudentEntity updateStudent(@PathVariable(value = "id") Integer id, @RequestBody StudentEntity entity){
-		
 		return studentService.updateStudent(id, entity);
 	}
 	@RequestMapping(value = "/deleteStudent/{id}", method = RequestMethod.DELETE)
