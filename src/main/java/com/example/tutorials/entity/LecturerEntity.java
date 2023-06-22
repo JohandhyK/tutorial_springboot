@@ -1,6 +1,7 @@
 package com.example.tutorials.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -28,27 +27,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "students")
+@Table(name = "lecturers")
 
-public class StudentEntity {
+public class LecturerEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
+	@NotNull
 	public Integer id;
 	
-	@Column(name = "first_name")
-	@NotNull
-	public String first_name;
+	@Column(name = "name")
+	public String name;
 	
-	@Column(name = "last_name")
-	@NotNull
-	public String last_name;
-	
-	@Column(name = "email")
-	public String email;
-	
-//	@Column(name = "city_id")
-//	public Integer city_id;
+	@Column(name = "title")
+	public String title;
 	
 	@Column(name = "status_deleted")
 	public Boolean status_deleted = false;
@@ -62,5 +54,5 @@ public class StudentEntity {
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updated_at;
-	
+
 }

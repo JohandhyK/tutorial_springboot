@@ -8,11 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -23,44 +19,30 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "students")
+@Table(name = "subjects")
+public class SubjectEntity {
 
-public class StudentEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
+	@NotNull
 	public Integer id;
 	
-	@Column(name = "first_name")
-	@NotNull
+	@Column(name = "name")
 	public String first_name;
 	
-	@Column(name = "last_name")
-	@NotNull
-	public String last_name;
-	
-	@Column(name = "email")
-	public String email;
-	
-//	@Column(name = "city_id")
-//	public Integer city_id;
-	
-	@Column(name = "status_deleted")
-	public Boolean status_deleted = false;
-	
-	@CreationTimestamp
 	@CreatedDate
-	@Column(name = "created_at", nullable = false, updatable = false)
-	public LocalDateTime created_at;
+	@Column(name = "createdAt", nullable = false, updatable = false)
+	public LocalDateTime createdAt;
 	
-	@UpdateTimestamp
     @LastModifiedDate
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updated_at;
-	
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
 }
