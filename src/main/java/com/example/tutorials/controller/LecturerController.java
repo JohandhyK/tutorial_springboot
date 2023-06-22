@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.tutorials.entity.LecturerEntity;
-import com.example.tutorials.entity.StudentEntity;
-import com.example.tutorials.repository.LecturerRepository;
 import com.example.tutorials.service.LecturerService;
 
 @RestController
@@ -26,14 +24,13 @@ public class LecturerController {
 		return lecturerService.addNewLecturer(lecturerEntity);
 	}
 	
-	@RequestMapping(value = "/viewAllLecturer", method = RequestMethod.GET)
+	@RequestMapping(value = "/viewAllLecturers", method = RequestMethod.GET)
 	public List<LecturerEntity> readAllLecturer(){
 		return lecturerService.getAllLecturer();
 	}
 	
 	@RequestMapping(value = "/updateLecturer/{id}", method = RequestMethod.PATCH)
-	public LecturerEntity updateLecturer(@PathVariable(value = "id") Integer id, @RequestBody LecturerEntity lecturerEntity){
-		
+	public LecturerEntity updateLecturer(@PathVariable(value = "id") Integer id, @RequestBody LecturerEntity lecturerEntity){	
 		return lecturerService.updateLecturer(id, lecturerEntity);
 	}
 	@RequestMapping(value = "/deleteLecturer/{id}", method = RequestMethod.DELETE)

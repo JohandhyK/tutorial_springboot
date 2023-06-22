@@ -12,11 +12,11 @@ import com.example.tutorials.repository.StudentRepository;
 
 @Service
 public class LecturerService {
+	
 	@Autowired
 	private LecturerRepository lecturerRepository;
 	
-	
-	//add new student
+	//add new lecturer
 	public LecturerEntity addNewLecturer(LecturerEntity lecturerEntity) {
 		LecturerEntity le = new LecturerEntity();
 		le.setName(lecturerEntity.getName());
@@ -27,12 +27,12 @@ public class LecturerService {
 		return lecturerRepository.save(le);
 	}
 	
-	//read all student
+	//read all lecturer
 	public List<LecturerEntity> getAllLecturer(){
 		return lecturerRepository.findAll();
 	}
 	
-	//update a student data
+	//update a lecturer data
 	public LecturerEntity updateLecturer(Integer id, LecturerEntity lecturer) 
 	{
 		LecturerEntity le = lecturerRepository.findById(id).get();
@@ -43,7 +43,7 @@ public class LecturerService {
 		return lecturerRepository.save(le);
 	}
 	
-	//delete Student data
+	//delete lecturer data
 	public void deleteLecturer(Integer id) {
 		LecturerEntity le = new LecturerEntity();
 		lecturerRepository.deleteById(id);

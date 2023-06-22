@@ -10,6 +10,7 @@ import com.example.tutorials.repository.StudentRepository;
 
 @Service
 public class StudentService {
+	
 	@Autowired
 	private StudentRepository studentRepository;
 	

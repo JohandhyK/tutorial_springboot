@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.aspectj.weaver.ast.Not;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -31,18 +34,27 @@ public class SubjectEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	@NotNull
 	public Integer id;
 	
 	@Column(name = "name")
-	public String first_name;
+	@NotNull
+	public String name;
 	
+	@Column(name = "description")
+	@NotNull
+	public String description;
+	
+	@Column(name = "status_deleted")
+	public Boolean status_deleted = false;
+	
+	@CreationTimestamp
 	@CreatedDate
-	@Column(name = "createdAt", nullable = false, updatable = false)
-	public LocalDateTime createdAt;
+	@Column(name = "created_at", nullable = false, updatable = false)
+	public LocalDateTime created_at;
 	
+	@UpdateTimestamp
     @LastModifiedDate
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updated_at;
 
 }

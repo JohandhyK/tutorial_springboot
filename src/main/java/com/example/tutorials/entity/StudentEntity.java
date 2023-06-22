@@ -45,6 +45,7 @@ public class StudentEntity {
 	public String last_name;
 	
 	@Column(name = "email")
+	@NotNull
 	public String email;
 	
 //	@Column(name = "city_id")

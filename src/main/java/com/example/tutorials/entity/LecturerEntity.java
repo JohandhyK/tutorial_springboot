@@ -37,9 +37,11 @@ public class LecturerEntity {
 	public Integer id;
 	
 	@Column(name = "name")
+	@NotNull
 	public String name;
 	
-	@Column(name = "title")
+	@Column(name = "title")	
+	@NotNull
 	public String title;
 	
 	@Column(name = "status_deleted")
