@@ -10,7 +10,6 @@ import com.example.tutorials.repository.StudentRepository;
 
 @Service
 public class StudentService {
-	
 	@Autowired
 	private StudentRepository studentRepository;
 	
@@ -49,7 +48,7 @@ public class StudentService {
 	
 	//delete Student data
 	public void deleteStudent(Integer id) {
-		StudentEntity se = new StudentEntity();
+		StudentEntity deleted = new StudentEntity();
 		studentRepository.deleteById(id);
 
 	}

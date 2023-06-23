@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.tutorials.entity.StudentEntity;
 import com.example.tutorials.entity.SubjectEntity;
+import com.example.tutorials.response.ResponseEntity;
 import com.example.tutorials.service.SubjectService;
 
 @RestController
@@ -20,19 +22,26 @@ public class SubjectController {
 	private SubjectService subjectService;
 	
 	@RequestMapping(value = "/addNewSubject", method = RequestMethod.POST)
-	public SubjectEntity addSubject(@RequestBody SubjectEntity subjectEntity) {
-		return subjectService.addNewSubject(subjectEntity);
+	public ResponseEntity<SubjectEntity> addSubject(@RequestBody SubjectEntity subjectEntity) {
+		SubjectEntity se = subjectService.addNewSubject(subjectEntity);
+		ResponseEntity<SubjectEntity> responseEntity = new ResponseEntity<SubjectEntity>(true, "Subject successfully added!", se);		
+		return responseEntity;
 	}
 	
 	@RequestMapping(value = "/viewAllSubjects", method = RequestMethod.GET)
-	public List<SubjectEntity> readAllSubject(){
-		return subjectService.getAllSubjects();
+	public ResponseEntity<List<SubjectEntity>>readAllSubject(){
+		List<SubjectEntity> se = subjectService.getAllSubjects();
+		ResponseEntity responseEntity = new ResponseEntity(true, "Subject successfully added!", se);		
+		return responseEntity;
 	}
 	
 	@RequestMapping(value = "/updateSubject/{id}", method = RequestMethod.PATCH)
-	public SubjectEntity updateSubject(@PathVariable(value = "id") Integer id, @RequestBody SubjectEntity subjectEntity){
-		return subjectService.updateSubjects(id, subjectEntity);
+	public ResponseEntity<SubjectEntity> updateSubject(@PathVariable(value = "id") Integer id, @RequestBody SubjectEntity subjectEntity){
+		SubjectEntity se = subjectService.updateSubjects(id, subjectEntity);
+		ResponseEntity<SubjectEntity> responseEntity = new ResponseEntity<SubjectEntity>(true, "Subject successfully added!", se);		
+		return responseEntity;
 	}
+	
 	@RequestMapping(value = "/deleteSubject/{id}", method = RequestMethod.DELETE)
 	public void deleteSubject(@PathVariable(value = "id") Integer id) {
 		subjectService.deleteSubject(id);
