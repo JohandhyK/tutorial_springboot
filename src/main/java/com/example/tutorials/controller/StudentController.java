@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.tutorials.entity.StudentEntity;
+import com.example.tutorials.response.ResponseEntity;
 import com.example.tutorials.service.StudentService;
 
 @RestController
@@ -23,6 +24,17 @@ public class StudentController {
 	public StudentEntity addStudent(@RequestBody StudentEntity studentEntity) {
 		return studentService.addNewStudent(studentEntity);
 	}
+//	@RequestMapping(value = "/addNewStudent", method = RequestMethod.POST)
+//	//with api
+//	public ResponseEntity addStudent(@RequestBody StudentEntity studentEntity) {
+//		studentService.addNewStudent(studentEntity);
+//		ResponseEntity res = new ResponseEntity();
+//		res.setMsg("Data successfully Added!");
+//		res.setSuccess(true);
+//		
+//		return res;
+//	}
+	
 	
 	@RequestMapping(value = "/viewAllStudents", method = RequestMethod.GET)
 	public List<StudentEntity> readAllStudent(){

@@ -36,5 +36,5 @@ public class LecturerController {
 	@RequestMapping(value = "/deleteLecturer/{id}", method = RequestMethod.DELETE)
 	public void deleteLecturer(@PathVariable(value = "id") Integer id) {
 		lecturerService.deleteLecturer(id);
-	}
+	}	
 }

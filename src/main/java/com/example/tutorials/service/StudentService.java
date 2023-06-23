@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.example.tutorials.entity.StudentEntity;
 import com.example.tutorials.repository.StudentRepository;
+import com.example.tutorials.response.ResponseEntity;
 
 @Service
 public class StudentService {
-	
 	@Autowired
 	private StudentRepository studentRepository;
 	
-	//add new student
+//	add new student
 	public StudentEntity addNewStudent(StudentEntity studentEntity) {
 		StudentEntity se = new StudentEntity();
 		se.setFirst_name(studentEntity.getFirst_name());
@@ -26,7 +26,7 @@ public class StudentService {
 		
 		return studentRepository.save(se);
 	}
-	
+
 	//read all student
 	public List<StudentEntity> getAllStudent(){
 		return studentRepository.findAll();
