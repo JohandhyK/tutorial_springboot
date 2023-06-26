@@ -1,15 +1,18 @@
 package com.example.tutorials.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.tutorials.entity.StudentEntity;
+import com.example.tutorials.repository.StudentRepository;
 import com.example.tutorials.response.ResponseEntity;
 import com.example.tutorials.service.StudentService;
 
@@ -33,6 +36,35 @@ public class StudentController {
 		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", se);		
 		return responseEntity;
 	}
+	
+	@RequestMapping(value = "/studentByID/{id}", method = RequestMethod.GET)
+    public ResponseEntity<StudentEntity> getDataById(@PathVariable Integer id) {
+        // Retrieve data by ID from your data service
+		Optional<StudentEntity> se = studentService.getDatabyId(id);
+
+        if (se != null) {
+    		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", se);		
+        	return responseEntity;
+        } else {
+    		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",se);		
+        	return responseEntity2;
+        }
+    }
+        
+//        @RequestMapping(value = "/data" , method = RequestMethod.GET)
+//        public ResponseEntity<StudentEntity> getDataByName(@RequestParam("first_name") String first_name) {
+//            // Retrieve data by name from your data service
+//        	StudentEntity se = studentService.findStudentByName(first_name);
+//
+//            if (se != null) {
+//        		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", se);		
+//            	return responseEntity;
+//            } else {
+//        		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",se);		
+//            	return responseEntity2;
+//            }
+//    }
+	
 	
 	@RequestMapping(value = "/updateStudent/{id}", method = RequestMethod.PATCH)
 	public ResponseEntity<StudentEntity> updateStudent(@PathVariable(value = "id") Integer id, @RequestBody StudentEntity entity){

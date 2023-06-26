@@ -2,6 +2,7 @@ package com.example.tutorials.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,5 +34,13 @@ public class LecturerSubjectsEntity {
 	@NotNull
 	public Integer id;
 
+    @ManyToOne
+    @JoinColumn(name = "lecturer_id")
+    public LecturerEntity lecturer;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    public SubjectEntity subject;
+    
 	
 }

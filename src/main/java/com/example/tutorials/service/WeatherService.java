@@ -5,11 +5,15 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.example.tutorials.entity.SubjectEntity;
+import com.example.tutorials.entity.WeatherEntity;
+import com.example.tutorials.repository.ThirdPartyRepository;
 
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -18,26 +22,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WeatherService {
 	
-	private static final String API_KEY = "62237a756fac460888484403232206";
-	private static final String API_URL = "http://api.weatherapi.com/v1/current.json";
-	private static final String city = "";
-	private static final String q = "no";
-
-	@Autowired
-	private RestTemplate restTemplate;
-	 
-	public Object getWeather() {
-		 try {
-			 HttpHeaders header = new HttpHeaders();
-//			 header.set("API_URL", API_URL);
-			 header.set("API_KEY", API_KEY);
-			 ResponseEntity<String> response = restTemplate.exchange(API_KEY, HttpMethod.GET, new HttpEntity<>(header), String.class);
-
-			 return response.getBody();
-		} catch (Exception e) {
-			log.error("Invalid data", e);
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Exception on finding the weather data!",e);
+	@Autowired 
+	ThirdPartyRepository thirdPartyRepository;
 	
-		}
+	public WeatherEntity addNewWeather(WeatherEntity weatherEntity) {
+        WeatherEntity weatherEntity2 = new WeatherEntity();
+        weatherEntity2.setCity(weatherEntity.getCity());
+        weatherEntity2.setAqi(weatherEntity.getAqi());
+       return thirdPartyRepository.save(weatherEntity2);
 	}
+
 } 

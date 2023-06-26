@@ -61,8 +61,8 @@ public class SubjectEntity {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updated_at;
 	
-	@OneToMany(targetEntity = LecturerSubjectsEntity.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "subject_id", referencedColumnName = "id")
-	private List<LecturerSubjectsEntity> lecturer;
+//	@OneToMany(targetEntity = LecturerSubjectsEntity.class, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "subject_id", referencedColumnName = "id")
+//	private List<LecturerSubjectsEntity> lecturer;
 
 }

@@ -68,7 +68,7 @@ public class StudentEntity {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updated_at;
 
-	@OneToMany(targetEntity = StudentLecturerEntity.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "student_id", referencedColumnName = "id")
-	private List<StudentLecturerEntity> lecturer;
+//	@OneToMany(targetEntity = StudentLecturerEntity.class, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "student_id", referencedColumnName = "id")
+//	private List<StudentLecturerEntity> lecturer;
 }
