@@ -1,6 +1,7 @@
 package com.example.tutorials.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,17 @@ public class StudentService {
 		return studentRepository.findAll();
 	}
 	
+	public Optional<StudentEntity> getDatabyId(Integer id) {
+        // Retrieve data by ID from your data service
+        StudentEntity se = studentRepository.findById(id).get();
+        return studentRepository.findById(id);
+
+	}
+	
+//	public StudentEntity findStudentByName(String first_name) {
+//        // Retrieve data by ID from your data service
+//		return studentRepository.findByName(first_name);
+//	}
 	//update a student data
 	public StudentEntity updateStudent(Integer id, StudentEntity entity) 
 	{
@@ -51,6 +63,11 @@ public class StudentService {
 		StudentEntity deleted = new StudentEntity();
 		studentRepository.deleteById(id);
 
+	}
+	
+	public StudentEntity defaultStatus(Integer id) {
+		StudentEntity se = studentRepository.findById(id).get();
+		return null;
 	}
 	
 }

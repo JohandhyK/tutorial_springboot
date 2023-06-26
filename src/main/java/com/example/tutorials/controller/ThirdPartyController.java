@@ -2,6 +2,8 @@ package com.example.tutorials.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,8 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.tutorials.entity.SubjectEntity;
 import com.example.tutorials.entity.WeatherEntity;
 import com.example.tutorials.repository.ThirdPartyRepository;
+import com.example.tutorials.service.WeatherService;
 
 @RestController
 @RequestMapping("/weather")
@@ -32,6 +36,9 @@ public class ThirdPartyController {
 
 	@Autowired
 	private ThirdPartyRepository thirdPartyRepository;
+	
+	@Autowired
+	private WeatherService service;
 			
     private final RestTemplate restTemplate;
 //
@@ -70,20 +77,12 @@ public class ThirdPartyController {
                                                     @RequestHeader("API-KEY") String apiKey) {
         String url = API_URL + "?key=" + apiKey + "&q=" + weatherEntity.getCity() + "&aqi=" + weatherEntity.getAqi();
 
-        HttpHeaders headers = new HttpHeaders();        
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-        
+        HttpHeaders headers = new HttpHeaders();          
         headers.setContentType(MediaType.APPLICATION_JSON);
-        WeatherEntity weatherEntity2 = new WeatherEntity();
-        weatherEntity2.setCity(weatherEntity.getCity());
-        weatherEntity2.setAqi(weatherEntity.getAqi());
-//        ada error
-//        thirdPartyRepository.save(weatherEntity2);
         
+        WeatherEntity weatherEntity2 = service.addNewWeather(weatherEntity);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);   
         return ResponseEntity.ok(response.getBody());
     }
-
-
-	
 }

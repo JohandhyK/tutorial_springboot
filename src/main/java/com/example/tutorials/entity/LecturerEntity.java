@@ -61,12 +61,12 @@ public class LecturerEntity {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updated_at;
 	
-	@OneToMany(targetEntity = StudentLecturerEntity.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "lecturer_id", referencedColumnName = "id")
-	private List<StudentLecturerEntity> student;
-
-	@OneToMany(targetEntity = LecturerSubjectsEntity.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "lecturer_id", referencedColumnName = "id")
-	private List<LecturerSubjectsEntity> subject;
+//	@OneToMany(targetEntity = StudentLecturerEntity.class, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "lecturer_id", referencedColumnName = "id")
+//	private List<StudentLecturerEntity> student;
+//
+//	@OneToMany(targetEntity = LecturerSubjectsEntity.class, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "lecturer_id", referencedColumnName = "id")
+//	private List<LecturerSubjectsEntity> subject;
 
 }

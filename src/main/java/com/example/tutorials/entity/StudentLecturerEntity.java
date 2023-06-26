@@ -28,6 +28,13 @@ public class StudentLecturerEntity {
 	@Column(name = "id")
 	@NotNull
 	public Integer id;
-	
+
+    @ManyToOne
+    @JoinColumn(name = "lecturer_id")
+    private LecturerEntity lecturer;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private StudentEntity student;
 }
 	
