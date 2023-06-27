@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.tutorials.entity.LecturerEntity;
 import com.example.tutorials.entity.StudentEntity;
+import com.example.tutorials.entity.SubjectEntity;
 import com.example.tutorials.response.ResponseEntity;
 import com.example.tutorials.service.LecturerService;
 
@@ -46,4 +47,12 @@ public class LecturerController {
 	public void deleteLecturer(@PathVariable(value = "id") Integer id) {
 		lecturerService.deleteLecturer(id);
 	}
+	
+	@RequestMapping(value = "/updateLecturerStatus/{id}", method = RequestMethod.PATCH)
+	public ResponseEntity<LecturerEntity> updateLecturerStatus(@PathVariable(value = "id") Integer id){
+		LecturerEntity se = lecturerService.updateLecturerStatus(id);
+		ResponseEntity<LecturerEntity> responseEntity = new ResponseEntity<LecturerEntity>(true, "Lecturer status successfully update!", se);		
+		return responseEntity;	
+	}
+	
 }

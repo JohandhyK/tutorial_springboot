@@ -23,8 +23,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "weathers")
-public class WeatherEntity {
+@Table(name = "cities")
+public class CitiesEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +40,7 @@ public class WeatherEntity {
 	@NotNull
 	public String aqi;
 	
-	 public WeatherEntity(String q, String aqi) {
+	 public CitiesEntity(String city, String aqi) {
          this.city = city;
          this.aqi = aqi;
      }

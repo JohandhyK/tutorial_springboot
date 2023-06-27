@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.tutorials.entity.StudentEntity;
 import com.example.tutorials.entity.SubjectEntity;
 import com.example.tutorials.repository.SubjectRepository;
 
@@ -18,7 +19,7 @@ public class SubjectService {
 		SubjectEntity se = new SubjectEntity();
 		se.setName(subjectEntity.getName());
 		se.setDescription(subjectEntity.getDescription());
-		se.setStatus_deleted(false);
+		se.setStatus(subjectEntity.getStatus());
 		se.setCreated_at(subjectEntity.getCreated_at());
 		se.setUpdated_at(subjectEntity.getUpdated_at());
 		
@@ -36,8 +37,21 @@ public class SubjectService {
 		SubjectEntity se = subjectRepository.findById(id).get();
 		se.setName(lecturer.getName());
 		se.setDescription(lecturer.getDescription());
-//		le.setUpdated_at(lecturer.getUpdated_at());
+		se.setUpdated_at(lecturer.getUpdated_at());
 
+		return subjectRepository.save(se);
+	}
+	
+	//update student status
+	public SubjectEntity updateSubjectStatus(Integer id) 
+	{
+		SubjectEntity se = subjectRepository.findById(id).get();
+		if(se.getStatus() == false) {
+			se.setStatus(true);	
+		}else {
+			se.setStatus(false);	
+		}
+		se.setUpdated_at(se.getUpdated_at());
 		return subjectRepository.save(se);
 	}
 	

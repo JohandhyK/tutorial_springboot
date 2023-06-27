@@ -20,7 +20,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity (name = "lecturer_subject_db")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,11 +36,11 @@ public class LecturerSubjectsEntity {
 
     @ManyToOne
     @JoinColumn(name = "lecturer_id")
-    public LecturerEntity lecturer;
+    public LecturerEntity lecturer_id;
 
     @ManyToOne
     @JoinColumn(name = "subject_id")
-    public SubjectEntity subject;
+    public SubjectEntity subject_id;
     
 	
 }

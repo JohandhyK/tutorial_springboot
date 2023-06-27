@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.tutorials.entity.SubjectEntity;
-import com.example.tutorials.entity.WeatherEntity;
+import com.example.tutorials.entity.CitiesEntity;
 import com.example.tutorials.repository.ThirdPartyRepository;
 
 import lombok.extern.java.Log;
@@ -25,8 +25,8 @@ public class WeatherService {
 	@Autowired 
 	ThirdPartyRepository thirdPartyRepository;
 	
-	public WeatherEntity addNewWeather(WeatherEntity weatherEntity) {
-        WeatherEntity weatherEntity2 = new WeatherEntity();
+	public CitiesEntity addNewWeather(CitiesEntity weatherEntity) {
+        CitiesEntity weatherEntity2 = new CitiesEntity();
         weatherEntity2.setCity(weatherEntity.getCity());
         weatherEntity2.setAqi(weatherEntity.getAqi());
        return thirdPartyRepository.save(weatherEntity2);

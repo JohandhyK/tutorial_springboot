@@ -20,7 +20,7 @@ public class StudentService {
 		se.setFirst_name(studentEntity.getFirst_name());
 		se.setLast_name(studentEntity.getLast_name());
 		se.setEmail(studentEntity.getEmail());
-		se.setStatus_deleted(studentEntity.getStatus_deleted());
+		se.setStatus(studentEntity.getStatus());
 		se.setCreated_at(studentEntity.getCreated_at());
 		se.setUpdated_at(studentEntity.getUpdated_at());
 		
@@ -38,11 +38,11 @@ public class StudentService {
         return studentRepository.findById(id);
 
 	}
+	//find by name
+	public List<StudentEntity> findByfirstname(String first_name) {
+		return  studentRepository.findByfirstname(first_name);
+	}
 	
-//	public StudentEntity findStudentByName(String first_name) {
-//        // Retrieve data by ID from your data service
-//		return studentRepository.findByName(first_name);
-//	}
 	//update a student data
 	public StudentEntity updateStudent(Integer id, StudentEntity entity) 
 	{
@@ -51,10 +51,22 @@ public class StudentService {
 		se.setFirst_name(entity.getFirst_name());
 		se.setLast_name(entity.getLast_name());
 		se.setEmail(entity.getEmail());
-//		se.setStatus_deleted(entity.getStatus_deleted());
-//		se.setCreated_at(entity.getCreated_at());
-//		se.setUpdated_at(entity.getUpdated_at());
-		
+		se.setUpdated_at(entity.getUpdated_at());
+
+		return studentRepository.save(se);
+	}
+	
+	//update student status
+	public StudentEntity updateStudentStatus(Integer id) 
+	{
+		StudentEntity se = studentRepository.findById(id).get();
+		if(se.getStatus() == false) {
+			se.setStatus(true);	
+		}else {
+			se.setStatus(false);	
+		}
+		se.setUpdated_at(se.getUpdated_at());
+
 		return studentRepository.save(se);
 	}
 	

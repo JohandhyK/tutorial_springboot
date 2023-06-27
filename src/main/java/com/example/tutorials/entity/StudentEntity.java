@@ -10,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -52,11 +54,12 @@ public class StudentEntity {
 	@NotNull
 	public String email;
 	
-//	@Column(name = "city_id")
-//	public Integer city_id;
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	public CitiesEntity city_id;
 	
-	@Column(name = "status_deleted")
-	public Boolean status_deleted = false;
+	@Column(name = "status")
+	public Boolean status= false;
 	
 	@CreationTimestamp
 	@CreatedDate
@@ -67,8 +70,7 @@ public class StudentEntity {
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updated_at;
-
-//	@OneToMany(targetEntity = StudentLecturerEntity.class, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "student_id", referencedColumnName = "id")
-//	private List<StudentLecturerEntity> lecturer;
+//
+//	@OneToOne(mappedBy = "students")
+//	private StudentLecturerEntity lecturer;
 }

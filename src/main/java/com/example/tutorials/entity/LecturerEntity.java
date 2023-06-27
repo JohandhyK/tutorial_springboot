@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -48,8 +49,8 @@ public class LecturerEntity {
 	@NotNull
 	public String title;
 	
-	@Column(name = "status_deleted")
-	public Boolean status_deleted = false;
+	@Column(name = "status")
+	public Boolean status= false;
 	
 	@CreationTimestamp
 	@CreatedDate
@@ -61,12 +62,10 @@ public class LecturerEntity {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updated_at;
 	
-//	@OneToMany(targetEntity = StudentLecturerEntity.class, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "lecturer_id", referencedColumnName = "id")
-//	private List<StudentLecturerEntity> student;
+//	@OneToMany(mappedBy = "lecturers")
+//	private StudentLecturerEntity student;
 //
-//	@OneToMany(targetEntity = LecturerSubjectsEntity.class, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "lecturer_id", referencedColumnName = "id")
-//	private List<LecturerSubjectsEntity> subject;
+//	@OneToOne(mappedBy = "lecturers")
+//	private LecturerSubjectsEntity subject;
 
 }
