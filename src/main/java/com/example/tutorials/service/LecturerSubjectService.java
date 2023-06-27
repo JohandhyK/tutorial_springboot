@@ -11,6 +11,7 @@ import com.example.tutorials.dto.LecturerSubjectDto;
 import com.example.tutorials.entity.LecturerEntity;
 import com.example.tutorials.entity.LecturerSubjectsEntity;
 import com.example.tutorials.entity.StudentEntity;
+import com.example.tutorials.entity.StudentLecturerEntity;
 import com.example.tutorials.entity.SubjectEntity;
 import com.example.tutorials.repository.LecturerRepository;
 import com.example.tutorials.repository.LecturerSubjectRepository;
@@ -23,35 +24,43 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class LecturerSubjectService {
 
-	@Autowired
-    private LecturerSubjectRepository lecturerSubjectRepository;
+		@Autowired
+	    private LecturerSubjectRepository lecturerSubjectRepository;
+		
+		@Autowired
+		private SubjectRepository subjectRepository;
+		
+		@Autowired
+		private LecturerRepository lecturerRepository;
 	
-	@Autowired
-	private SubjectRepository subjectRepository;
+	    public LecturerSubjectsEntity saveLecturerSubject(LecturerSubjectDto lecturerSubjectDTO) {
 	
-	@Autowired
-	private LecturerRepository lecturerRepository;
-
-    public LecturerSubjectsEntity saveLecturerSubject(LecturerSubjectDto lecturerSubjectDTO) {
-
-            Optional<LecturerEntity> lecturerOptional = lecturerRepository.findById(lecturerSubjectDTO.getLecturerId());
-            LecturerEntity lecturerEntity = lecturerOptional.orElseThrow(() -> 
-            	new RuntimeException("Lecturer not found with ID: " + lecturerSubjectDTO.getLecturerId())
-            );
-            Optional<SubjectEntity> subjectOptional = subjectRepository.findById(lecturerSubjectDTO.getSubjectId());
-            SubjectEntity subjectEntity = subjectOptional.orElseThrow(() ->
-            	new RuntimeException("Subject not found with ID: " + lecturerSubjectDTO.getSubjectId())
-            );
-            
-        	LecturerSubjectsEntity lecturerSubjectsEntity = new LecturerSubjectsEntity();
-        	lecturerSubjectsEntity.setLecturer(lecturerEntity);
-        	lecturerSubjectsEntity.setSubject(subjectEntity);
-        	
-        	return lecturerSubjectRepository.save(lecturerSubjectsEntity);
-    }
-
-    public List<LecturerSubjectsEntity> getAllLecturerSubjects() {
-        return lecturerSubjectRepository.findAll();
-    }
+	            Optional<LecturerEntity> lecturerOptional = lecturerRepository.findById(lecturerSubjectDTO.getLecturerId());
+	            LecturerEntity lecturerEntity = lecturerOptional.orElseThrow(() -> 
+	            	new RuntimeException("Lecturer not found with ID: " + lecturerSubjectDTO.getLecturerId())
+	            );
+	            Optional<SubjectEntity> subjectOptional = subjectRepository.findById(lecturerSubjectDTO.getSubjectId());
+	            SubjectEntity subjectEntity = subjectOptional.orElseThrow(() ->
+	            	new RuntimeException("Subject not found with ID: " + lecturerSubjectDTO.getSubjectId())
+	            );
+	            
+	        	LecturerSubjectsEntity lecturerSubjectsEntity = new LecturerSubjectsEntity();
+	        	lecturerSubjectsEntity.setLecturer_id(lecturerEntity);
+	        	lecturerSubjectsEntity.setSubject_id(subjectEntity);
+	        	
+	        	return lecturerSubjectRepository.save(lecturerSubjectsEntity);
+	    }
+	
+	    public List<LecturerSubjectsEntity> getAllLecturerSubjects() {
+	        return lecturerSubjectRepository.findAll();
+	    }
+	    
+	    public List<LecturerSubjectsEntity> findAllByLecturerId(Integer lecturer_id){
+			return lecturerSubjectRepository.findAllByLecturerId(lecturer_id);
+	    }
+	    
+	    public List<LecturerSubjectsEntity> findAllBySubjectId(Integer subject_id){
+			return lecturerSubjectRepository.findAllBySubjectId(subject_id);
+	    }
 
 }

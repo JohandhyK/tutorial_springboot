@@ -16,7 +16,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity (name = "student_lecturer_db")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,10 +31,10 @@ public class StudentLecturerEntity {
 
     @ManyToOne
     @JoinColumn(name = "lecturer_id")
-    private LecturerEntity lecturer;
+    private LecturerEntity lecturer_id;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private StudentEntity student;
+    private StudentEntity student_id;
 }
 	

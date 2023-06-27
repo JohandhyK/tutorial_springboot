@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.tutorials.entity.SubjectEntity;
-import com.example.tutorials.entity.WeatherEntity;
+import com.example.tutorials.entity.CitiesEntity;
 import com.example.tutorials.repository.ThirdPartyRepository;
 import com.example.tutorials.service.WeatherService;
 
@@ -54,7 +54,7 @@ public class ThirdPartyController {
  	@RequestMapping(value = "/current", method = RequestMethod.GET)
     public ResponseEntity<String> getCurrentWeather(@RequestParam("city") String city,
             @RequestParam(value = "aqi", defaultValue = "no") String aqi) {
- 		WeatherEntity weatherEntity = new WeatherEntity();
+ 		CitiesEntity weatherEntity = new CitiesEntity();
         String url = API_URL + "?key=" + API_KEY + "&q=" + weatherEntity.getCity()+ "&aqi=" + weatherEntity.getAqi();
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
         return new ResponseEntity<>(response.getBody(), response.getStatusCode());
@@ -73,14 +73,14 @@ public class ThirdPartyController {
     
     @GetMapping("/currentByJson")
     @ResponseBody
-    public ResponseEntity<String> getCurrentWeather(@RequestBody WeatherEntity weatherEntity,
+    public ResponseEntity<String> getCurrentWeather(@RequestBody CitiesEntity weatherEntity,
                                                     @RequestHeader("API-KEY") String apiKey) {
         String url = API_URL + "?key=" + apiKey + "&q=" + weatherEntity.getCity() + "&aqi=" + weatherEntity.getAqi();
 
         HttpHeaders headers = new HttpHeaders();          
         headers.setContentType(MediaType.APPLICATION_JSON);
         
-        WeatherEntity weatherEntity2 = service.addNewWeather(weatherEntity);
+        CitiesEntity weatherEntity2 = service.addNewWeather(weatherEntity);
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);   
         return ResponseEntity.ok(response.getBody());

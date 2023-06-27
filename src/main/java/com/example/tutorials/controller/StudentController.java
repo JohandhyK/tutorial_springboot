@@ -51,25 +51,32 @@ public class StudentController {
         }
     }
         
-//        @RequestMapping(value = "/data" , method = RequestMethod.GET)
-//        public ResponseEntity<StudentEntity> getDataByName(@RequestParam("first_name") String first_name) {
-//            // Retrieve data by name from your data service
-//        	StudentEntity se = studentService.findStudentByName(first_name);
-//
-//            if (se != null) {
-//        		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", se);		
-//            	return responseEntity;
-//            } else {
-//        		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",se);		
-//            	return responseEntity2;
-//            }
-//    }
-	
+        @RequestMapping(value = "/data/{first_name}" , method = RequestMethod.GET)
+        public ResponseEntity<StudentEntity> getDataByName(@RequestParam("first_name") String first_name) {
+            // Retrieve data by name from your data service
+        	List<StudentEntity> se = studentService.findByfirstname(first_name);
+
+            if (se != null) {
+        		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", se);		
+            	return responseEntity;
+            } else {
+        		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",se);		
+            	return responseEntity2;
+            }
+    }
 	
 	@RequestMapping(value = "/updateStudent/{id}", method = RequestMethod.PATCH)
 	public ResponseEntity<StudentEntity> updateStudent(@PathVariable(value = "id") Integer id, @RequestBody StudentEntity entity){
 		StudentEntity se = studentService.updateStudent(id, entity);
 		ResponseEntity<StudentEntity> responseEntity = new ResponseEntity<StudentEntity>(true, "Student successfully update!", se);		
+		return responseEntity;	
+	}
+	
+	//update status student aktif/nonaktif
+	@RequestMapping(value = "/updateStudentStatus/{id}", method = RequestMethod.PATCH)
+	public ResponseEntity<StudentEntity> updateStudentStatus(@PathVariable(value = "id") Integer id){
+		StudentEntity se = studentService.updateStudentStatus(id);
+		ResponseEntity<StudentEntity> responseEntity = new ResponseEntity<StudentEntity>(true, "Student status successfully update!", se);		
 		return responseEntity;	
 	}
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.tutorials.entity.LecturerEntity;
 import com.example.tutorials.entity.StudentEntity;
+import com.example.tutorials.entity.SubjectEntity;
 import com.example.tutorials.repository.LecturerRepository;
 import com.example.tutorials.repository.StudentRepository;
 
@@ -21,7 +22,7 @@ public class LecturerService {
 		LecturerEntity le = new LecturerEntity();
 		le.setName(lecturerEntity.getName());
 		le.setTitle(lecturerEntity.getTitle());
-		le.setStatus_deleted(false);
+		le.setStatus(false);
 		le.setCreated_at(lecturerEntity.getCreated_at());
 		le.setUpdated_at(lecturerEntity.getUpdated_at());
 		return lecturerRepository.save(le);
@@ -38,9 +39,20 @@ public class LecturerService {
 		LecturerEntity le = lecturerRepository.findById(id).get();
 		le.setName(lecturer.getName());
 		le.setTitle(lecturer.getTitle());
-//		le.setUpdated_at(lecturer.getUpdated_at());
+		le.setUpdated_at(lecturer.getUpdated_at());
 
 		return lecturerRepository.save(le);
+	}
+	
+	public LecturerEntity updateLecturerStatus(Integer id) 
+	{
+		LecturerEntity se = lecturerRepository.findById(id).get();
+		if(se.getStatus() == false) {
+			se.setStatus(true);	
+		}else {
+			se.setStatus(false);	
+		}
+		return lecturerRepository.save(se);
 	}
 	
 	//delete lecturer data

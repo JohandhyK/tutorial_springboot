@@ -48,8 +48,8 @@ public class SubjectEntity {
 	@NotNull
 	public String description;
 	
-	@Column(name = "status_deleted")
-	public Boolean status_deleted = false;
+	@Column(name = "status")
+	public Boolean status = false;
 	
 	@CreationTimestamp
 	@CreatedDate

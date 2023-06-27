@@ -46,4 +46,13 @@ public class SubjectController {
 	public void deleteSubject(@PathVariable(value = "id") Integer id) {
 		subjectService.deleteSubject(id);
 	}
+	
+	//update status subject aktif/nonaktif
+	@RequestMapping(value = "/updateSubjectStatus/{id}", method = RequestMethod.PATCH)
+	public ResponseEntity<SubjectEntity> updateSubjectStatus(@PathVariable(value = "id") Integer id){
+		SubjectEntity se = subjectService.updateSubjectStatus(id);
+		ResponseEntity<SubjectEntity> responseEntity = new ResponseEntity<SubjectEntity>(true, "Subject status successfully update!", se);		
+		return responseEntity;	
+	}
+	
 }
