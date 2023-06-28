@@ -59,7 +59,7 @@ public class StudentEntity {
 	public CitiesEntity city_id;
 	
 	@Column(name = "status")
-	public Boolean status= false;
+	public Boolean status;
 	
 	@CreationTimestamp
 	@CreatedDate
