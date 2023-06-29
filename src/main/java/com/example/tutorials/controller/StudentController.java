@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,18 +52,28 @@ public class StudentController {
         }
     }
         
-        @RequestMapping(value = "/data/{first_name}" , method = RequestMethod.GET)
-        public ResponseEntity<StudentEntity> getDataByName(@RequestParam("first_name") String first_name) {
-            // Retrieve data by name from your data service
-        	List<StudentEntity> se = studentService.findByfirstname(first_name);
-
-            if (se != null) {
-        		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", se);		
-            	return responseEntity;
-            } else {
-        		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",se);		
-            	return responseEntity2;
-            }
+    @RequestMapping(value = "/studentByName/{first_name}" , method = RequestMethod.GET)
+    public ResponseEntity<StudentEntity> getDataByName(@RequestParam("first_name") String first_name) {
+    	List<StudentEntity> se = studentService.findByfirstname(first_name);
+        if (se != null) {
+    		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", se);		
+        	return responseEntity;
+        } else {
+    		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",se);		
+        	return responseEntity2;
+        }
+    }
+    
+    @RequestMapping(value = "/getStudentByStatus" , method = RequestMethod.GET)
+    public ResponseEntity<StudentEntity> getDataByStatus() {
+    	List<StudentEntity> se = studentService.getAllByStatus();
+        if (se != null) {
+    		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", se);		
+        	return responseEntity;
+        } else {
+    		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",se);		
+        	return responseEntity2;
+        }
     }
 	
 	@RequestMapping(value = "/updateStudent/{id}", method = RequestMethod.PATCH)

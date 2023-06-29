@@ -20,7 +20,8 @@ public class StudentService {
 		se.setFirst_name(studentEntity.getFirst_name());
 		se.setLast_name(studentEntity.getLast_name());
 		se.setEmail(studentEntity.getEmail());
-		se.setStatus(studentEntity.getStatus());
+		se.setStatus(true);
+		se.setCity_id(studentEntity.getCity_id());
 		se.setCreated_at(studentEntity.getCreated_at());
 		se.setUpdated_at(studentEntity.getUpdated_at());
 		
@@ -43,6 +44,11 @@ public class StudentService {
 		return  studentRepository.findByfirstname(first_name);
 	}
 	
+	//find by status
+	public List<StudentEntity> getAllByStatus() {
+		return  studentRepository.getAllByStatus();
+	}
+	
 	//update a student data
 	public StudentEntity updateStudent(Integer id, StudentEntity entity) 
 	{
@@ -51,6 +57,7 @@ public class StudentService {
 		se.setFirst_name(entity.getFirst_name());
 		se.setLast_name(entity.getLast_name());
 		se.setEmail(entity.getEmail());
+		se.setCity_id(entity.getCity_id());
 		se.setUpdated_at(entity.getUpdated_at());
 
 		return studentRepository.save(se);
@@ -75,11 +82,6 @@ public class StudentService {
 		StudentEntity deleted = new StudentEntity();
 		studentRepository.deleteById(id);
 
-	}
-	
-	public StudentEntity defaultStatus(Integer id) {
-		StudentEntity se = studentRepository.findById(id).get();
-		return null;
 	}
 	
 }

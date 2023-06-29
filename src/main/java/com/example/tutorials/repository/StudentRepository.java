@@ -14,7 +14,12 @@ import com.example.tutorials.entity.StudentEntity;
 public interface StudentRepository extends JpaRepository<StudentEntity, Integer>{
 	
 	@Query(nativeQuery = true,
-			value = "SELECT * FROM students s where"
+			value = "SELECT * FROM students s where "
 					+ "s.first_name = :first_name")
 	List<StudentEntity>findByfirstname(@Param ("first_name") String first_name);
+	
+	@Query(nativeQuery = true,
+			value = "SELECT * FROM students s where "
+					+ "s.status = 1")
+	List<StudentEntity>getAllByStatus();
 }

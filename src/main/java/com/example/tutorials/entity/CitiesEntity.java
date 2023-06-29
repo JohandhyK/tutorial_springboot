@@ -1,5 +1,6 @@
 package com.example.tutorials.entity;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -40,9 +41,16 @@ public class CitiesEntity {
 	@NotNull
 	public String aqi;
 	
-	 public CitiesEntity(String city, String aqi) {
-         this.city = city;
-         this.aqi = aqi;
-     }
+	@Column(name = "country")
+	public String country;
+	
+	@Column(name = "region")
+	public String region;
+	
+	@Column(name = "temp_c")
+	public Double temp_c;
+
+	@Column(name = "date_time")
+	public String date_time;
 
 }

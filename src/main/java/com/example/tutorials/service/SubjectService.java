@@ -19,7 +19,7 @@ public class SubjectService {
 		SubjectEntity se = new SubjectEntity();
 		se.setName(subjectEntity.getName());
 		se.setDescription(subjectEntity.getDescription());
-		se.setStatus(subjectEntity.getStatus());
+		se.setStatus(true);
 		se.setCreated_at(subjectEntity.getCreated_at());
 		se.setUpdated_at(subjectEntity.getUpdated_at());
 		

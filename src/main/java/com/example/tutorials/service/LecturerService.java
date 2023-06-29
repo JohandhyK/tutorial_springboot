@@ -22,7 +22,7 @@ public class LecturerService {
 		LecturerEntity le = new LecturerEntity();
 		le.setName(lecturerEntity.getName());
 		le.setTitle(lecturerEntity.getTitle());
-		le.setStatus(false);
+		le.setStatus(true);
 		le.setCreated_at(lecturerEntity.getCreated_at());
 		le.setUpdated_at(lecturerEntity.getUpdated_at());
 		return lecturerRepository.save(le);
