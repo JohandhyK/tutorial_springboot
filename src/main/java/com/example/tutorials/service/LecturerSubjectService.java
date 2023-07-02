@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.tutorials.dto.LecturerSubjectDto;
 import com.example.tutorials.entity.LecturerEntity;
 import com.example.tutorials.entity.LecturerSubjectsEntity;
+import com.example.tutorials.entity.StudentCitiesEntity;
 import com.example.tutorials.entity.StudentEntity;
 import com.example.tutorials.entity.StudentLecturerEntity;
 import com.example.tutorials.entity.SubjectEntity;
@@ -62,5 +63,13 @@ public class LecturerSubjectService {
 	    public List<LecturerSubjectsEntity> findAllBySubjectId(Integer subject_id){
 			return lecturerSubjectRepository.findAllBySubjectId(subject_id);
 	    }
+	    
+		public Optional<LecturerSubjectsEntity> getDatabyId(Integer id) {
+	        // Retrieve data by ID from your data service
+			LecturerSubjectsEntity se = lecturerSubjectRepository.findById(id).orElse(null);
+//	        studentLecturerRepository.findAllById(lecturerId);
+	        
+	        return lecturerSubjectRepository.findById(id);
+		}
 
 }

@@ -15,40 +15,40 @@ import com.example.tutorials.response.ResponseEntity;
 import com.example.tutorials.service.SubjectService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/subject")
 public class SubjectController {
 	
 	@Autowired
 	private SubjectService subjectService;
 	
-	@RequestMapping(value = "/addNewSubject", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<SubjectEntity> addSubject(@RequestBody SubjectEntity subjectEntity) {
 		SubjectEntity se = subjectService.addNewSubject(subjectEntity);
 		ResponseEntity<SubjectEntity> responseEntity = new ResponseEntity<SubjectEntity>(true, "Subject successfully added!", se);		
 		return responseEntity;
 	}
 	
-	@RequestMapping(value = "/viewAllSubjects", method = RequestMethod.GET)
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ResponseEntity<List<SubjectEntity>>readAllSubject(){
 		List<SubjectEntity> se = subjectService.getAllSubjects();
 		ResponseEntity responseEntity = new ResponseEntity(true, "Subject successfully added!", se);		
 		return responseEntity;
 	}
 	
-	@RequestMapping(value = "/updateSubject/{id}", method = RequestMethod.PATCH)
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.PATCH)
 	public ResponseEntity<SubjectEntity> updateSubject(@PathVariable(value = "id") Integer id, @RequestBody SubjectEntity subjectEntity){
 		SubjectEntity se = subjectService.updateSubjects(id, subjectEntity);
 		ResponseEntity<SubjectEntity> responseEntity = new ResponseEntity<SubjectEntity>(true, "Subject successfully added!", se);		
 		return responseEntity;
 	}
 	
-	@RequestMapping(value = "/deleteSubject/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/remove/{id}", method = RequestMethod.DELETE)
 	public void deleteSubject(@PathVariable(value = "id") Integer id) {
 		subjectService.deleteSubject(id);
 	}
 	
 	//update status subject aktif/nonaktif
-	@RequestMapping(value = "/updateSubjectStatus/{id}", method = RequestMethod.PATCH)
+	@RequestMapping(value = "/status/{id}", method = RequestMethod.PATCH)
 	public ResponseEntity<SubjectEntity> updateSubjectStatus(@PathVariable(value = "id") Integer id){
 		SubjectEntity se = subjectService.updateSubjectStatus(id);
 		ResponseEntity<SubjectEntity> responseEntity = new ResponseEntity<SubjectEntity>(true, "Subject status successfully update!", se);		

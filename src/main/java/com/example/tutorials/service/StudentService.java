@@ -21,7 +21,6 @@ public class StudentService {
 		se.setLast_name(studentEntity.getLast_name());
 		se.setEmail(studentEntity.getEmail());
 		se.setStatus(true);
-		se.setCity_id(studentEntity.getCity_id());
 		se.setCreated_at(studentEntity.getCreated_at());
 		se.setUpdated_at(studentEntity.getUpdated_at());
 		
@@ -41,7 +40,7 @@ public class StudentService {
 	}
 	//find by name
 	public List<StudentEntity> findByfirstname(String first_name) {
-		return  studentRepository.findByfirstname(first_name);
+		return  studentRepository.findByfirstnameIs(first_name);
 	}
 	
 	//find by status
@@ -57,7 +56,6 @@ public class StudentService {
 		se.setFirst_name(entity.getFirst_name());
 		se.setLast_name(entity.getLast_name());
 		se.setEmail(entity.getEmail());
-		se.setCity_id(entity.getCity_id());
 		se.setUpdated_at(entity.getUpdated_at());
 
 		return studentRepository.save(se);

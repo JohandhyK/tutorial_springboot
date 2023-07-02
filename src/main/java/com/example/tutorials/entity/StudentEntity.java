@@ -29,7 +29,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity (name = "students")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -54,9 +54,9 @@ public class StudentEntity {
 	@NotNull
 	public String email;
 	
-	@ManyToOne
-	@JoinColumn(name = "city_id")
-	public CitiesEntity city_id;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "city_id")
+//	public CitiesEntity city_id;
 	
 	@Column(name = "status")
 	public Boolean status;

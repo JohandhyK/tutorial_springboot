@@ -45,8 +45,8 @@ public class StudentLecturerService {
     	return studentLecturerRepository.save(lecturerSubjectsEntity);	
     }
 	
-    public List<StudentLecturerEntity> getAllLecturerSubjects() {
-    	return (List<StudentLecturerEntity>) studentLecturerRepository.findAll();
+    public List<StudentLecturerEntity> getAllStudentLecturer() {
+    	return studentLecturerRepository.findAll();
     }
     
     
