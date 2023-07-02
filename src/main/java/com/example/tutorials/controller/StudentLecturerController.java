@@ -20,29 +20,29 @@ import com.example.tutorials.service.LecturerSubjectService;
 import com.example.tutorials.service.StudentLecturerService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/student-lecturer")
 public class StudentLecturerController {
 	
 	@Autowired
     private StudentLecturerService studentLecturerService;
 
 	//add data
-    @RequestMapping(value = "/addStudentLecturer", method = RequestMethod.POST)
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public ResponseEntity addStudentLecturer(@RequestBody StudentLecturerDto studentLecturerDto) {
 		StudentLecturerEntity lss= studentLecturerService.saveLecturerSubject(studentLecturerDto);
     	try {
-			ResponseEntity response = new ResponseEntity(true ,"Data Successfully Added!", lss);
+			ResponseEntity<StudentLecturerEntity> response = new ResponseEntity<>(true ,"Data Successfully Added!", lss);
 			return response;
     	} catch (Exception e) {
-    		ResponseEntity response = new ResponseEntity(false ,"Parameter Limited!", lss);
+    		ResponseEntity<StudentLecturerEntity> response = new ResponseEntity<>(false ,"Parameter Limited!", lss);
 			return response;		
 		}
     }
     
     //tampilkan semua data di studlec_db
-	@RequestMapping(value = "/viewStudentLecturer", method = RequestMethod.GET)
-    public ResponseEntity<List<StudentLecturerEntity>> readAllLecturerSubjects() {
-        List<StudentLecturerEntity> lecturerSubjects = studentLecturerService.getAllLecturerSubjects();
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ResponseEntity<List<StudentLecturerEntity>> readAllSudentLecturer() {
+        List<StudentLecturerEntity> lecturerSubjects = studentLecturerService.getAllStudentLecturer();
         if(lecturerSubjects!= null) {
         	ResponseEntity responseEntity = new ResponseEntity(true ,"Finding data success!", lecturerSubjects);	
             return responseEntity;
@@ -53,7 +53,7 @@ public class StudentLecturerController {
     }
 	
 	//membaca id dari id  
-	@RequestMapping(value = "/StudentLecturerId/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentLecturerEntity>> getDataById(@PathVariable Integer id) {
       // Retrieve data by ID from your data service
 		Optional<StudentLecturerEntity> se = studentLecturerService.getDatabyId(id);
@@ -63,12 +63,12 @@ public class StudentLecturerController {
         	return responseEntity;
         } else {
     		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",se);		
-        	return responseEntity2;
+//        	return responseEntity2;
         }
 	}
 	
 	//Read id dari lecturer id
-	@RequestMapping(value = "/StudentLecturerLecId/{lecturer_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/search/{lecturer_id}/lecturer", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentLecturerEntity>> findAllByLecturerId(@PathVariable("lecturer_id") Integer lecturer_id) {
       // Retrieve data by ID from your data service
 		List<StudentLecturerEntity> se = studentLecturerService.findAllByLecturerId(lecturer_id);
@@ -82,7 +82,7 @@ public class StudentLecturerController {
 	}
 	
 	//Read id dari student id
-	@RequestMapping(value = "/StudentLecturerStuId/{student_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/search/{student_id}/student", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentLecturerEntity>> findAllByStudentId(@PathVariable("student_id") Integer student_id) {
       // Retrieve data by ID from your data service
 		List<StudentLecturerEntity> se = studentLecturerService.findAllByStudentId(student_id);

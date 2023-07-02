@@ -1,9 +1,5 @@
 package com.example.tutorials.entity;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,14 +17,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity (name = "lecturer_subject_db")
+@Entity (name = "student_cities_db")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "lecturer_subject_db")
-public class LecturerSubjectsEntity {
-
+@Table(name = "student_cities_db")
+public class StudentCitiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -36,12 +31,10 @@ public class LecturerSubjectsEntity {
 	public Integer id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "lecturer_id")
-    public LecturerEntity lecturer_id;
+    @JoinColumn(name = "student_id")
+    public StudentEntity student_id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "subject_id")
-    public SubjectEntity subject_id;
-    
-	
+    @JoinColumn(name = "cities_id")
+    public CitiesEntity cities_id;
 }

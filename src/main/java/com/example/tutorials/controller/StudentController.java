@@ -18,27 +18,27 @@ import com.example.tutorials.response.ResponseEntity;
 import com.example.tutorials.service.StudentService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/student")
 public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
 	
-	@RequestMapping(value = "/addNewStudent", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<StudentEntity> addStudent(@RequestBody StudentEntity studentEntity) {
 		StudentEntity se = studentService.addNewStudent(studentEntity);
 		ResponseEntity<StudentEntity> responseEntity = new ResponseEntity<StudentEntity>(true, "Student successfully added!", se);		
 		return responseEntity;
 	}
 	
-	@RequestMapping(value = "/viewAllStudents", method = RequestMethod.GET)
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentEntity>> readAllStudent(){
 		List<StudentEntity> se = studentService.getAllStudent();
 		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", se);		
 		return responseEntity;
 	}
 	
-	@RequestMapping(value = "/studentByID/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
     public ResponseEntity<StudentEntity> getDataById(@PathVariable Integer id) {
         // Retrieve data by ID from your data service
 		Optional<StudentEntity> se = studentService.getDatabyId(id);
@@ -52,7 +52,7 @@ public class StudentController {
         }
     }
         
-    @RequestMapping(value = "/studentByName/{first_name}" , method = RequestMethod.GET)
+    @RequestMapping(value = "/search/{first_name}/fname" , method = RequestMethod.GET)
     public ResponseEntity<StudentEntity> getDataByName(@RequestParam("first_name") String first_name) {
     	List<StudentEntity> se = studentService.findByfirstname(first_name);
         if (se != null) {
@@ -64,7 +64,7 @@ public class StudentController {
         }
     }
     
-    @RequestMapping(value = "/getStudentByStatus" , method = RequestMethod.GET)
+    @RequestMapping(value = "/status" , method = RequestMethod.GET)
     public ResponseEntity<StudentEntity> getDataByStatus() {
     	List<StudentEntity> se = studentService.getAllByStatus();
         if (se != null) {
@@ -76,7 +76,7 @@ public class StudentController {
         }
     }
 	
-	@RequestMapping(value = "/updateStudent/{id}", method = RequestMethod.PATCH)
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.PATCH)
 	public ResponseEntity<StudentEntity> updateStudent(@PathVariable(value = "id") Integer id, @RequestBody StudentEntity entity){
 		StudentEntity se = studentService.updateStudent(id, entity);
 		ResponseEntity<StudentEntity> responseEntity = new ResponseEntity<StudentEntity>(true, "Student successfully update!", se);		
@@ -84,14 +84,14 @@ public class StudentController {
 	}
 	
 	//update status student aktif/nonaktif
-	@RequestMapping(value = "/updateStudentStatus/{id}", method = RequestMethod.PATCH)
+	@RequestMapping(value = "/status/{id}", method = RequestMethod.PATCH)
 	public ResponseEntity<StudentEntity> updateStudentStatus(@PathVariable(value = "id") Integer id){
 		StudentEntity se = studentService.updateStudentStatus(id);
 		ResponseEntity<StudentEntity> responseEntity = new ResponseEntity<StudentEntity>(true, "Student status successfully update!", se);		
 		return responseEntity;	
 	}
 	
-	@RequestMapping(value = "/deleteStudent/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/remove/{id}", method = RequestMethod.DELETE)
 	public void deleteStudent(@PathVariable(value = "id") Integer id) {
 		studentService.deleteStudent(id);
 	}
