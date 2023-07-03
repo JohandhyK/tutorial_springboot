@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -43,15 +45,16 @@ public class StudentEntity {
 	public Integer id;
 	
 	@Column(name = "first_name")
-	@NotNull
+	@NotBlank
 	public String first_name;
 	
 	@Column(name = "last_name")
-	@NotNull
+	@NotBlank
 	public String last_name;
 	
 	@Column(name = "email")
-	@NotNull
+	@NotBlank
+	@Email
 	public String email;
 	
 //	@ManyToOne(cascade = CascadeType.ALL)

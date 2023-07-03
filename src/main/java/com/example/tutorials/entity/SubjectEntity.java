@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.aspectj.weaver.ast.Not;
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,7 +28,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Entity
+@Entity (name = "subjects")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,11 +42,11 @@ public class SubjectEntity {
 	public Integer id;
 	
 	@Column(name = "name")
-	@NotNull
+	@NotBlank
 	public String name;
 	
 	@Column(name = "description")
-	@NotNull
+	@NotBlank
 	public String description;
 	
 	@Column(name = "status")

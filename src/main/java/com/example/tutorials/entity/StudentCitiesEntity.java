@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
 
@@ -32,9 +33,11 @@ public class StudentCitiesEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
+    @NotNull
     public StudentEntity student_id;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @NotNull
     @JoinColumn(name = "cities_id")
     public CitiesEntity cities_id;
 }

@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -27,7 +28,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity (name = "lecturers")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,16 +42,16 @@ public class LecturerEntity {
 	@NotNull
 	public Integer id;
 	
-	@Column(name = "name")
-	@NotNull
+	@Column(name = "name", nullable = false)
+	@NotBlank
 	public String name;
 	
-	@Column(name = "title")	
-	@NotNull
+	@Column(name = "title", nullable = false)	
+	@NotBlank
 	public String title;
 	
 	@Column(name = "status")
-	public Boolean status= false;
+	public Boolean status = false;
 	
 	@CreationTimestamp
 	@CreatedDate

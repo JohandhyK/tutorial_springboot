@@ -3,7 +3,10 @@ package com.example.tutorials.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,78 +23,82 @@ import com.example.tutorials.service.LecturerSubjectService;
 import com.example.tutorials.service.StudentCitiesService;
 
 @RestController
-@RequestMapping("/api/student-cities")
+@RequestMapping("/api/students-cities")
 public class StudentCitiesController {
 
 	@Autowired
     private StudentCitiesService studentCitiesService;
 
 	//add data ke sub_lec_db
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public ResponseEntity addStudentCities(@RequestBody StudentCitiesDTO studentCitiesDTO) {
+    @RequestMapping(value = "/insert-data", method = RequestMethod.POST)
+    public ResponseEntity addStudentCities(@Valid @RequestBody StudentCitiesDTO studentCitiesDTO, Errors errors) {
+    	if(errors.hasErrors()) {
+    		ResponseEntity response = new ResponseEntity("Failed" ,"Parameter data limited!");
+			return response;			
+    	}
 		StudentCitiesEntity sce= studentCitiesService.saveStudentCities(studentCitiesDTO);
-    	try {
-			ResponseEntity response = new ResponseEntity(true ,"Data Success to Add!", sce);
-			return response;
-    	} catch (Exception e) {
-    		ResponseEntity response = new ResponseEntity(false ,"Parameter data limited!", sce);
-			return response;		
-		}
+		ResponseEntity response = new ResponseEntity("Success" ,"Data Added!", sce);
+		return response;
     }
 
     //view all sub_lec_db
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<StudentCitiesEntity>> readAllLStudentCities() {
         List<StudentCitiesEntity> sce = studentCitiesService.getAllLecturerSubjects();
         if(sce!= null) {
-        	ResponseEntity responseEntity = new ResponseEntity(true ,"Finding data success!", sce);	
+        	ResponseEntity responseEntity = new ResponseEntity("Success" ,"Data Found!", sce);	
             return responseEntity;
         }else {
-         	ResponseEntity responseEntity = new ResponseEntity(false ,"failed!", sce);	
+         	ResponseEntity responseEntity = new ResponseEntity("Failed" ,"No Data Foudnd!", sce);	
             return responseEntity;
         }	
     }
 	
 	//Read id dari lecturer id
-	@RequestMapping(value = "/search/{student_id}/student", method = RequestMethod.GET)
+	@RequestMapping(value = "/students/{student_id}/cities", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentCitiesEntity>> findAllByStudentId(@PathVariable("student_id") Integer student_id) {
       // Retrieve data by ID from your data service
 		List<StudentCitiesEntity> sce = studentCitiesService.findAllByStudentId(student_id);
 		if (sce != null) {
-    		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", sce);		
+    		ResponseEntity responseEntity = new ResponseEntity("Success","Data Found!", sce);		
         	return responseEntity;
         } else {
-    		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",sce);		
+    		ResponseEntity responseEntity2 = new ResponseEntity("Failed","Data not found",sce);		
         	return responseEntity2;
         }
 	}
 	
 	//Read id dari subject id
-	@RequestMapping(value = "/search/{cities_id}/cities", method = RequestMethod.GET)
+	@RequestMapping(value = "/cities/{cities_id}/students", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentCitiesEntity>> findAllByCitiesId(@PathVariable("cities_id") Integer cities_id) {
       // Retrieve data by ID from your data service
 		List<StudentCitiesEntity> sce = studentCitiesService.findAllByCitiesId(cities_id);
 		if (sce != null) {
-    		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", sce);		
+    		ResponseEntity responseEntity = new ResponseEntity("Success","Data Found!", sce);		
         	return responseEntity;
         } else {
-    		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",sce);		
+    		ResponseEntity responseEntity2 = new ResponseEntity("Failed","Data not found",sce);		
         	return responseEntity2;
         }
 	}
 	
 	//membaca id dari id  
-	@RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentCitiesEntity>> getDataById(@PathVariable Integer id) {
       // Retrieve data by ID from your data service
 		Optional<StudentCitiesEntity> se = studentCitiesService.getDatabyId(id);
 //		List<StudentLecturerEntity> se = studentLecturerService.getDatabyLecId(lecturerId);
 		if (se != null) {
-    		ResponseEntity responseEntity = new ResponseEntity(true,"data successfully show!", se);		
+    		ResponseEntity responseEntity = new ResponseEntity("Success","Data Show!", se);		
         	return responseEntity;
         } else {
-    		ResponseEntity responseEntity2 = new ResponseEntity(false,"Data not found",se);		
+    		ResponseEntity responseEntity2 = new ResponseEntity("Failed","Data not found",se);		
         	return responseEntity2;
         }
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public String deleteDataById(@PathVariable(value = "id") Integer id) {
+		return "Student-Cities data successfully deleted with status " + studentCitiesService.deleteDataById(id);
 	}
 }
