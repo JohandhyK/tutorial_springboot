@@ -72,4 +72,8 @@ public class LecturerSubjectService {
 	        return lecturerSubjectRepository.findById(id);
 		}
 
+		public Integer deleteDataById(Integer id) {
+			return lecturerSubjectRepository.deleteDataById(id);
+		}
+
 }

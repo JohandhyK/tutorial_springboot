@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -33,10 +35,12 @@ public class StudentLecturerEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "lecturer_id")
+    @NotNull
     private LecturerEntity lecturer_id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
+    @NotNull
     private StudentEntity student_id;
 }
 	

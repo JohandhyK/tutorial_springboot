@@ -10,6 +10,7 @@ import com.example.tutorials.entity.StudentEntity;
 import com.example.tutorials.entity.SubjectEntity;
 import com.example.tutorials.repository.LecturerRepository;
 import com.example.tutorials.repository.StudentRepository;
+import com.example.tutorials.response.ResponseEntity;
 
 @Service
 public class LecturerService {
@@ -19,13 +20,17 @@ public class LecturerService {
 	
 	//add new lecturer
 	public LecturerEntity addNewLecturer(LecturerEntity lecturerEntity) {
-		LecturerEntity le = new LecturerEntity();
-		le.setName(lecturerEntity.getName());
-		le.setTitle(lecturerEntity.getTitle());
-		le.setStatus(true);
-		le.setCreated_at(lecturerEntity.getCreated_at());
-		le.setUpdated_at(lecturerEntity.getUpdated_at());
-		return lecturerRepository.save(le);
+		if(lecturerEntity.getName() == null && lecturerEntity.getTitle() == null) {
+            throw new IllegalArgumentException("Name and division must not be null");
+		}else {
+			LecturerEntity le = new LecturerEntity();
+			le.setName(lecturerEntity.getName());
+			le.setTitle(lecturerEntity.getTitle());
+			le.setStatus(true);
+			le.setCreated_at(lecturerEntity.getCreated_at());
+			le.setUpdated_at(lecturerEntity.getUpdated_at());
+			return lecturerRepository.save(le);		
+		}
 	}
 	
 	//read all lecturer
@@ -56,10 +61,8 @@ public class LecturerService {
 	}
 	
 	//delete lecturer data
-	public void deleteLecturer(Integer id) {
-		LecturerEntity le = new LecturerEntity();
-		lecturerRepository.deleteById(id);
-
+	public Integer deleteLecturer(Integer id) {
+		return lecturerRepository.deleteDataById(id);
 	}
-	
+
 }

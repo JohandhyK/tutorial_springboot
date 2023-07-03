@@ -17,6 +17,7 @@ import com.example.tutorials.repository.LecturerRepository;
 import com.example.tutorials.repository.StudentCitiesRepository;
 import com.example.tutorials.repository.StudentRepository;
 import com.example.tutorials.repository.ThirdPartyRepository;
+import com.example.tutorials.response.ResponseEntity;
 
 @Service
 public class StudentCitiesService {
@@ -68,4 +69,8 @@ public class StudentCitiesService {
     public List<StudentCitiesEntity> findAllByCitiesId(Integer id){
 		return studentCitiesRepository.findAllByCitiesId(id);
     }
+
+	public Integer deleteDataById(Integer id) {
+		return studentCitiesRepository.deleteDataById(id);		
+	}
 }

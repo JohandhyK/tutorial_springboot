@@ -58,12 +58,4 @@ public class WeatherService {
     public void saveWeatherData(CitiesEntity weatherData) {
     	thirdPartyRepository.save(weatherData);
     }
-
-
-//	public CitiesEntity getCurrentCities(CitiesDTO cities) {
-//		CitiesEntity
-//		
-//		return null;
-//	}
-
 } 

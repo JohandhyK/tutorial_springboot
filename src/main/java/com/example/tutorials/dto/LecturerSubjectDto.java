@@ -1,6 +1,7 @@
 package com.example.tutorials.dto;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
 
 import com.example.tutorials.entity.LecturerEntity;
 import com.example.tutorials.entity.LecturerSubjectsEntity;
@@ -19,8 +20,10 @@ import lombok.ToString;
 @ToString
 public class LecturerSubjectDto {
 
+	@NotNull
 	public Integer lecturerId;
 	
+	@NotNull
 	public Integer subjectId;
 
 }

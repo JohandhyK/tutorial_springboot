@@ -62,7 +62,7 @@ public class ThirdPartyController {
         this.thirdPartyRepository = thirdPartyRepository;
     }
     
- 	@RequestMapping(value = "/current", method = RequestMethod.GET)
+ 	@RequestMapping(value = "/current-data", method = RequestMethod.GET)
     public ResponseEntity<String> getCurrentWeather(@RequestParam("city") String city,
             @RequestParam(value = "aqi", defaultValue = "no") String aqi) {
  		CitiesEntity weatherEntity = new CitiesEntity();
@@ -72,7 +72,7 @@ public class ThirdPartyController {
    }
  	
  	//blm di req body
-    @GetMapping("/currentWithoutBody")
+    @GetMapping("/insert-data")
     public ResponseEntity<String> getCurrentWeather() {
         String city = "London";
         String url = API_URL + "?key=" + API_KEY + "&q=" + city + "&aqi=no";
@@ -82,7 +82,7 @@ public class ThirdPartyController {
         return ResponseEntity.ok(response.getBody());
     }
         
-    @GetMapping("/currentByJson")
+    @GetMapping("/with-json")
     @ResponseBody
     public ResponseEntity<String> getCurrentWeatherWithJson(@RequestBody CitiesDTO cities,
                                                     @RequestHeader("API-KEY") String apiKey) {
@@ -96,7 +96,7 @@ public class ThirdPartyController {
         return ResponseEntity.ok(response.getBody());
     }
     
-    @RequestMapping(value = "/insertWeather", method = RequestMethod.POST )
+    @RequestMapping(value = "/insert-weather", method = RequestMethod.POST )
     public CitiesEntity insertCurrentWeather(@RequestBody CitiesDTO cities, @RequestHeader("API-KEY") String apiKey)
     {
     	String city = cities.getCity();
@@ -115,9 +115,4 @@ public class ThirdPartyController {
         return citiesEntity;        
     }
     
-    
-    //insert
-    // List<Object> obj = getCurrWeather("jakarta","yes")
-	// String lon = obj.location.lon
-	// Boolean insert = xxxEntity.insertToDb(lon, ....)
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.tutorials.entity.StudentEntity;
 import com.example.tutorials.repository.StudentRepository;
+import com.example.tutorials.response.ResponseEntity;
 
 @Service
 public class StudentService {
@@ -76,10 +77,8 @@ public class StudentService {
 	}
 	
 	//delete Student data
-	public void deleteStudent(Integer id) {
-		StudentEntity deleted = new StudentEntity();
-		studentRepository.deleteById(id);
-
+	public Integer deleteStudent(Integer id) {
+		return studentRepository.deleteDataById(id);
 	}
 	
 }
