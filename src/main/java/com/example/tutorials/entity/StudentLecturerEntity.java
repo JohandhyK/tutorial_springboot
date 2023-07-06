@@ -33,13 +33,13 @@ public class StudentLecturerEntity {
 	@NotNull
 	public Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "lecturer_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "lecturer_id", nullable = false)
     @NotNull
     private LecturerEntity lecturer_id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "student_id", nullable = false)
     @NotNull
     private StudentEntity student_id;
 }

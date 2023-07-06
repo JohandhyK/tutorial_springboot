@@ -21,6 +21,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -66,7 +67,7 @@ public class LecturerEntity {
 //	@OneToMany(mappedBy = "lecturers")
 //	private StudentLecturerEntity student;
 //
-//	@OneToOne(mappedBy = "lecturers")
-//	private LecturerSubjectsEntity subject;
+//	@OneToMany(mappedBy = "lecturers")
+//	private LecturerSubjectsEntity lecturer;
 
 }

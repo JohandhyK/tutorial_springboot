@@ -44,6 +44,8 @@ public class WeatherService {
     public CitiesEntity getCurrentWeatherData(String API, CitiesDTO cities) {
     	API_URL = API;
         StoreDataDTO response = restTemplate.getForObject(API_URL, StoreDataDTO.class);
+		System.out.println("After getting rest template: " + response);
+
         CitiesEntity weatherData = new CitiesEntity();
         weatherData.setCity(cities.getCity());
         weatherData.setAqi(cities.getAqi());

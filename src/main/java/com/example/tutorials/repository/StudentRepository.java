@@ -19,7 +19,7 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Integer>
 	
 	@Query(nativeQuery = true,
 			value = "SELECT * FROM students s where "
-					+ "s.first_name=:first_name")
+					+ "s.first_name =:first_name")
 	List<StudentEntity>findByfirstnameIs(@Param ("first_name") String first_name);
 	
 	@Query(nativeQuery = true,
@@ -33,4 +33,5 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Integer>
 			value = "DELETE from students s where "
 					+ "s.id = :id")
 	Integer deleteDataById(@Param(value = "id") Integer id);
+	
 }

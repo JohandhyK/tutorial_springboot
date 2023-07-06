@@ -1,6 +1,7 @@
 package com.example.tutorials.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,10 @@ public class LecturerService {
 	//delete lecturer data
 	public Integer deleteLecturer(Integer id) {
 		return lecturerRepository.deleteDataById(id);
+	}
+
+	public Optional<LecturerEntity> getDatabyId(Integer id) {
+        return lecturerRepository.findById(id);
 	}
 
 }

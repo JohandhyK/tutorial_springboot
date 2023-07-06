@@ -59,7 +59,7 @@ public class StudentController {
         }
     }
         
-    @RequestMapping(value = "/first_name/{first_name}" , method = RequestMethod.GET)
+    @RequestMapping(value = "/first_name",method = RequestMethod.GET)
     public ResponseEntity<StudentEntity> getDataByName(@RequestParam("first_name") String first_name) {
     	List<StudentEntity> se = studentService.findByfirstname(first_name);
         if (se != null) {

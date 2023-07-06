@@ -33,4 +33,7 @@ public interface LecturerSubjectRepository extends JpaRepository<LecturerSubject
 			value = "DELETE from lecturer_subject_db lsdb where "
 					+ "lsdb.id = :id")
 	Integer deleteDataById(@Param(value = "id") Integer id);	
+	
+    boolean existsById(Integer id);
+
 }

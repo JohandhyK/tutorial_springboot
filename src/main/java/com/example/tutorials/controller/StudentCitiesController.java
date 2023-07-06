@@ -29,6 +29,12 @@ public class StudentCitiesController {
 	@Autowired
     private StudentCitiesService studentCitiesService;
 
+	public StudentCitiesEntity checkDuplicates(StudentCitiesDTO citiesDTO) {
+		
+		
+		return null;
+	}
+	
 	//add data ke sub_lec_db
     @RequestMapping(value = "/insert-data", method = RequestMethod.POST)
     public ResponseEntity addStudentCities(@Valid @RequestBody StudentCitiesDTO studentCitiesDTO, Errors errors) {
@@ -37,6 +43,11 @@ public class StudentCitiesController {
 			return response;			
     	}
 		StudentCitiesEntity sce= studentCitiesService.saveStudentCities(studentCitiesDTO);
+		if(sce == null) {
+			ResponseEntity response = new ResponseEntity("Failed" ,"Data is empty to add!");
+			return response;	
+		}
+		
 		ResponseEntity response = new ResponseEntity("Success" ,"Data Added!", sce);
 		return response;
     }

@@ -1,6 +1,7 @@
 package com.example.tutorials.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -35,7 +36,7 @@ public class SubjectController {
 		return responseEntity;
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<SubjectEntity>>readAllSubject(){
 		List<SubjectEntity> se = subjectService.getAllSubjects();
 		ResponseEntity responseEntity = new ResponseEntity("Success", "Data Found!", se);		
@@ -57,6 +58,20 @@ public class SubjectController {
 	public String deleteDataById(@PathVariable(value = "id") Integer id) {
 		return "Subject data successfully dleleted with status " + subjectService.deleteDataById(id);
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<SubjectEntity> getDataById(@PathVariable Integer id) {
+        // Retrieve data by ID from your data service
+		Optional<SubjectEntity> se = subjectService.getDatabyId(id);
+
+        if (se != null) {
+    		ResponseEntity responseEntity = new ResponseEntity("Success","Data Found!", se);		
+        	return responseEntity;
+        } else {
+    		ResponseEntity responseEntity2 = new ResponseEntity("Failed","Data not found",se);		
+        	return responseEntity2;
+        }
+    }
 	
 	//update status subject aktif/nonaktif
 	@RequestMapping(value = "/update-status/{id}", method = RequestMethod.PATCH)

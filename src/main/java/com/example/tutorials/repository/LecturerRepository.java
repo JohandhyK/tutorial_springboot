@@ -1,5 +1,7 @@
 package com.example.tutorials.repository;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +22,12 @@ public interface LecturerRepository extends JpaRepository<LecturerEntity, Intege
 			value = "DELETE from lecturers l where "
 					+ "l.id = :id")
 	Integer deleteDataById(@Param(value = "id") Integer id);
+	
+//    boolean checkifExistsById(Integer id);
+	
+	@Query(nativeQuery = true,
+			value = "SELECT COUNT(:lecturer_id) from lecturers l where "
+					+ "l.id = :lecturer_id")
+	Optional<LecturerEntity> countId(@Param(value = "lecturer_id") Integer lecturer_id);
+
 }

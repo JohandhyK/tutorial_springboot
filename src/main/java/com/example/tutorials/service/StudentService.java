@@ -35,7 +35,6 @@ public class StudentService {
 	
 	public Optional<StudentEntity> getDatabyId(Integer id) {
         // Retrieve data by ID from your data service
-        StudentEntity se = studentRepository.findById(id).get();
         return studentRepository.findById(id);
 
 	}

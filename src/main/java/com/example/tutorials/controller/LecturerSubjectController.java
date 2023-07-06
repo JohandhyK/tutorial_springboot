@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.tutorials.dto.LecturerSubjectDto;
+import com.example.tutorials.entity.LecturerEntity;
 import com.example.tutorials.entity.LecturerSubjectsEntity;
 import com.example.tutorials.entity.StudentCitiesEntity;
 import com.example.tutorials.entity.StudentEntity;
@@ -30,25 +31,43 @@ public class LecturerSubjectController {
 
 	//add data ke sub_lec_db
     @RequestMapping(value = "/insert-data", method = RequestMethod.POST)
-    public ResponseEntity addLecturerSubject(@Valid @RequestBody LecturerSubjectDto lecturerSubjectDTO, Errors errors) {
+    public ResponseEntity<LecturerSubjectsEntity> addLecturerSubject(@Valid @RequestBody LecturerSubjectDto lecturerSubjectDTO, Errors errors) {
 		if(errors.hasErrors()) {
-    		ResponseEntity response = new ResponseEntity("Failed","Parameter data limited!");
+    		ResponseEntity<LecturerSubjectsEntity> response = new ResponseEntity<LecturerSubjectsEntity>("Failed","Parameter data limited!");
 			return response;
 		}
     	LecturerSubjectsEntity lss= lecturerSubjectService.saveLecturerSubject(lecturerSubjectDTO);
-		ResponseEntity response = new ResponseEntity("Success","Data Success to Add!", lss);
+		if(lss == null) {
+			ResponseEntity<LecturerSubjectsEntity> response = new ResponseEntity<LecturerSubjectsEntity>("Failed" ,"Data is empty to add!");
+			return response;	
+		}
+    	ResponseEntity<LecturerSubjectsEntity> response = new ResponseEntity<LecturerSubjectsEntity>("Success","Data Success to Add!", lss);
 		return response;
     }
+    
+    //update data
+	@RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+	public ResponseEntity<LecturerSubjectsEntity> updateLecturerEntity(@Valid @PathVariable(value = "id") Integer id, 
+			@Valid @RequestBody LecturerSubjectDto lecturerSubjectDto, Errors errors){	
+		if(errors.hasErrors()) {
+			ResponseEntity<LecturerSubjectsEntity> responseEntity = new ResponseEntity<LecturerSubjectsEntity>("Failed", "Lecturer fail to updated!");		
+			return responseEntity;
+		}
+		LecturerSubjectsEntity le = lecturerSubjectService.updateLecturerData(id, lecturerSubjectDto);
+		ResponseEntity<LecturerSubjectsEntity> responseEntity = new ResponseEntity<LecturerSubjectsEntity>("Success", "Lecturer successfully updated!", le);		
+		return responseEntity;
+		
+	}
 
     //view all sub_lec_db
 	@RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<LecturerSubjectsEntity>> readAllLecturerSubjects() {
         List<LecturerSubjectsEntity> lecturerSubjects = lecturerSubjectService.getAllLecturerSubjects();
         if(lecturerSubjects!= null) {
-        	ResponseEntity responseEntity = new ResponseEntity("Success" ,"Data Found!", lecturerSubjects);	
+        	ResponseEntity<List<LecturerSubjectsEntity>> responseEntity = new ResponseEntity<List<LecturerSubjectsEntity>>("Success" ,"Data Found!", lecturerSubjects);	
             return responseEntity;
         }else {
-         	ResponseEntity responseEntity = new ResponseEntity("Failed" ,"No Data Found!", lecturerSubjects);	
+         	ResponseEntity<List<LecturerSubjectsEntity>> responseEntity = new ResponseEntity<List<LecturerSubjectsEntity>>("Failed" ,"No Data Found!", lecturerSubjects);	
             return responseEntity;
         }	
     }
@@ -59,10 +78,10 @@ public class LecturerSubjectController {
       // Retrieve data by ID from your data service
 		List<LecturerSubjectsEntity> se = lecturerSubjectService.findAllByLecturerId(lecturer_id);
 		if (se != null) {
-    		ResponseEntity responseEntity = new ResponseEntity("Success","data Found!", se);		
+    		ResponseEntity<List<LecturerSubjectsEntity>> responseEntity = new ResponseEntity<List<LecturerSubjectsEntity>>("Success","data Found!", se);		
         	return responseEntity;
         } else {
-    		ResponseEntity responseEntity2 = new ResponseEntity("Failed","Data not found",se);		
+    		ResponseEntity<List<LecturerSubjectsEntity>> responseEntity2 = new ResponseEntity<List<LecturerSubjectsEntity>>("Failed","Data not found");		
         	return responseEntity2;
         }
 	}
@@ -73,10 +92,10 @@ public class LecturerSubjectController {
       // Retrieve data by ID from your data service
 		List<LecturerSubjectsEntity> se = lecturerSubjectService.findAllBySubjectId(subject_id);
 		if (se != null) {
-    		ResponseEntity responseEntity = new ResponseEntity("Success","data Found!", se);		
+    		ResponseEntity responseEntity = new ResponseEntity<Object>("Success","data Found!", se);		
         	return responseEntity;
         } else {
-    		ResponseEntity responseEntity2 = new ResponseEntity("Failed","Data not found",se);		
+    		ResponseEntity responseEntity2 = new ResponseEntity<Object>("Failed","Data not found",se);		
         	return responseEntity2;
         }
 	}
@@ -87,7 +106,7 @@ public class LecturerSubjectController {
 		Optional<LecturerSubjectsEntity> se = lecturerSubjectService.getDatabyId(id);
 //		List<StudentLecturerEntity> se = studentLecturerService.getDatabyLecId(lecturerId);
 		if (se != null) {
-    		ResponseEntity responseEntity = new ResponseEntity("Success","Data Found!", se);		
+    		ResponseEntity<List<StudentLecturerEntity>> responseEntity = new ResponseEntity("Success","Data Found!", se);		
         	return responseEntity;
         } else {
     		ResponseEntity responseEntity2 = new ResponseEntity("False","Data not found",se);		

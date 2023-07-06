@@ -110,7 +110,6 @@ public class ThirdPartyController {
 		System.out.println("Response take res data : " + responseBody);
 		CitiesEntity citiesEntity = service.getCurrentWeatherData(url, cities);
 		service.saveWeatherData(citiesEntity);
-		System.out.println("After getting response body: " + responseBody);
 
         return citiesEntity;        
     }

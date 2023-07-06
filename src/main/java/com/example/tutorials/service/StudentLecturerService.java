@@ -30,6 +30,12 @@ public class StudentLecturerService {
 	
     public StudentLecturerEntity saveLecturerSubject(StudentLecturerDto studentLecturerDto) {
 
+    	if(studentLecturerDto.getLecturerId() == null && studentLecturerDto.getStudentId() == null) {
+    		new RuntimeException("Either data is null with Lecturer ID : " + studentLecturerDto.getLecturerId()
+    			+ " or with Student ID : " + studentLecturerDto.getStudentId());
+    		return null;
+    	}
+    	
 		Optional<StudentEntity> studentOptional = studentRepository.findById(studentLecturerDto.getStudentId());
 		StudentEntity studentEntity = studentOptional.orElseThrow(() ->
 		new RuntimeException("Student not found with ID: " + studentLecturerDto.getStudentId())

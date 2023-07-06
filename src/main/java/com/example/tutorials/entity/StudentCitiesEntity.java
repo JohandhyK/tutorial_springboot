@@ -3,6 +3,7 @@ package com.example.tutorials.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,13 +32,13 @@ public class StudentCitiesEntity {
 	@NotNull
 	public Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "student_id", nullable = false)
     @NotNull
     public StudentEntity student_id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
-    @JoinColumn(name = "cities_id")
+    @JoinColumn(name = "cities_id", nullable = false)
     public CitiesEntity cities_id;
 }

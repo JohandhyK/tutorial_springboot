@@ -1,7 +1,10 @@
 package com.example.tutorials.dto;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.MetaValue;
 
 import com.example.tutorials.entity.LecturerEntity;
 import com.example.tutorials.entity.LecturerSubjectsEntity;

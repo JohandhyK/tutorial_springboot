@@ -33,11 +33,17 @@ public class StudentCitiesService {
 	
     public StudentCitiesEntity saveStudentCities(StudentCitiesDTO studentCitiesDTO) {
 
+    	if(studentCitiesDTO.getCitiesId() == null && studentCitiesDTO.getStudentId() == null) {
+    		new RuntimeException("Either data is null with StudentID: " + studentCitiesDTO.getStudentId()
+    			+ " or with CitiesID : " + studentCitiesDTO.getCitiesId());
+    		return null;
+    	}
+    	
 		Optional<StudentEntity> studentOptional = studentRepository.findById(studentCitiesDTO.getStudentId());
 		StudentEntity studentEntity = studentOptional.orElseThrow(() ->
 		new RuntimeException("Student not found with ID: " + studentCitiesDTO.getStudentId())
 		);
-    	
+ 
         Optional<CitiesEntity> citiesOptional = thirdPartyRepository.findById(studentCitiesDTO.getCitiesId());
         CitiesEntity citiesEntity = citiesOptional.orElseThrow(() -> 
         	new RuntimeException("Cities not found with ID: " + studentCitiesDTO.getCitiesId())
@@ -50,7 +56,7 @@ public class StudentCitiesService {
     }
 	
     public List<StudentCitiesEntity> getAllLecturerSubjects() {
-    	return (List<StudentCitiesEntity>) studentCitiesRepository.findAll();
+    	return studentCitiesRepository.findAll();
     }
     
     

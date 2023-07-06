@@ -37,7 +37,11 @@ public class StudentLecturerController {
 			return response;		
 		}
     	StudentLecturerEntity lss= studentLecturerService.saveLecturerSubject(studentLecturerDto);
-		ResponseEntity<StudentLecturerEntity> response = new ResponseEntity<>("Success" ,"Data Successfully Added!", lss);
+		if(lss == null) {
+			ResponseEntity response = new ResponseEntity("Failed" ,"Data is empty to add!");
+			return response;	
+		}
+    	ResponseEntity<StudentLecturerEntity> response = new ResponseEntity<>("Success" ,"Data Successfully Added!", lss);
 		return response;
     }
     
