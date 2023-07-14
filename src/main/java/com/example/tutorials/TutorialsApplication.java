@@ -11,6 +11,9 @@ public class TutorialsApplication {
 		SpringApplication.run(TutorialsApplication.class, args);
 		System.out.println("Run Complete!");
 		System.out.println("test commit 1");
+		System.out.println("test commit 3");
+		System.out.println("test commit 5");
+		System.out.println("test commit 6");
 	}
 	
 }
