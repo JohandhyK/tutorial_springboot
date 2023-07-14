@@ -10,6 +10,7 @@ public class TutorialsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TutorialsApplication.class, args);
 		System.out.println("Run Complete!");
+		System.out.println("test commit 1");
 	}
 	
 }
